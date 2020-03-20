@@ -19,3 +19,7 @@ app.listen(3000, () => {
 app.get("/weight", (req, res, next) => {
   res.json(BalanceData);
 });
+
+app.get("/", (req, res, next) => {
+  res.send('<body style="text-align:center"><h2>Dein Gewicht</h2><p>'+BalanceBoard.totalWeight+'</p></body>');
+});
