@@ -135,7 +135,7 @@ def calc():
             # connected to a wii board
             try:
                 # get board data
-                data = recieveSocket.recv(25)
+                data = recieveSocket.recv(1024)
                 intype = int(data.encode("hex")[2:4])
                 if intype == INPUT_STATUS:
                     # set Reporting Type
