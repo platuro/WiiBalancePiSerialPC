@@ -11,6 +11,7 @@ raspi.init(() => {
       serial.write('Hello from raspi-serial');
       function SendTest(){
         serial.write('Hello from raspi-serial');
+        console.log("Sende Nachricht");
       }
       setInterval(SendTest, 1000);
     });
