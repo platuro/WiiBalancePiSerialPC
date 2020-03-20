@@ -133,7 +133,6 @@ def calc():
     while True:
         if address is not None and isConnected(address):
             # connected to a wii board
-            time.sleep(1)
             try:
                 # get board data
                 data = recieveSocket.recv(25)
