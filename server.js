@@ -23,16 +23,3 @@ app.get("/weight", (req, res, next) => {
 app.get("/", (req, res, next) => {
   res.send('<body style="text-align:center"><h2>Dein Gewicht</h2><p>'+BalanceData.totalWeight+'</p></body>');
 });*/
-
-const raspi = require('raspi');
-const Serial = require('raspi-serial').Serial;
- 
-raspi.init(() => {
-  var serial = new Serial({baudRate:9600});
-  serial.open(() => {
-    serial.on('data', (data) => {
-      process.stdout.write(data);
-    });
-    serial.write('Hello from raspi-serial');
-  });
-});
