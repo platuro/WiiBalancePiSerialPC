@@ -135,61 +135,9 @@ def calc():
             # connected to a wii board
             try:
                 # get board data
-                data = recieveSocket.recv(1024)
-                intype = int(data.encode("hex")[2:4])
-                if intype == INPUT_STATUS:
-                    # set Reporting Type
-                    bytearr = ["00", COMMAND_REPORTING,
-                               CONTINUOUS_REPORTING, EXTENSION_8BYTES]
-                    send(controlSocket, bytearr)
-                elif intype == INPUT_READ_DATA:
-                    if calibrationRequested:
-                        packetLength = (
-                            int(str(data[4]).encode("hex"), 16) / 16 + 1)
-                        calibration = parseCalibrationResponse(
-                            calibration, data[7:(7 + packetLength)])
-
-                        if packetLength < 16:
-                            calibrationRequested = False
-                elif intype == EXTENSION_8BYTES:
-                    bytes = data[2:12]
-                    buttonBytes = bytes[0:2]
-                    bytes = bytes[2:12]
-                    buttonPressed = False
-                    buttonReleased = False
-
-                    state = (int(buttonBytes[0].encode("hex"), 16) << 8) | int(
-                        buttonBytes[1].encode("hex"), 16)
-                    if state == BUTTON_DOWN_MASK:
-                        buttonPressed = True
-                        if not buttonDown:
-                            # button pressed
-                            buttonDown = True
-                    if not buttonPressed:
-                        if buttonDown:
-                            # button released
-                            buttonReleased = True
-                            buttonDown = False
-
-                    rawTR = (int(bytes[0].encode("hex"), 16) <<
-                             8) + int(bytes[1].encode("hex"), 16)
-                    rawBR = (int(bytes[2].encode("hex"), 16) <<
-                             8) + int(bytes[3].encode("hex"), 16)
-                    rawTL = (int(bytes[4].encode("hex"), 16) <<
-                             8) + int(bytes[5].encode("hex"), 16)
-                    rawBL = (int(bytes[6].encode("hex"), 16) <<
-                             8) + int(bytes[7].encode("hex"), 16)
-
-                    topLeft = calcMass(calibration, rawTL, TOP_LEFT)
-                    topRight = calcMass(calibration, rawTR, TOP_RIGHT)
-                    bottomLeft = calcMass(calibration, rawBL, BOTTOM_LEFT)
-                    bottomRight = calcMass(calibration, rawBR, BOTTOM_RIGHT)
-
-                    totalWeight = topLeft + topRight + bottomLeft + bottomRight
-
-                    print('{ "connected": true, "topLeft":' + str(topLeft) + ', "topRight":' + str(topRight) + ', "bottomLeft":' + str(bottomLeft) + ', "bottomRight":' + str(
-                        bottomRight) + ', "totalWeight":' + str(totalWeight) + ', "buttonPressed":' + str(buttonPressed).lower() + ', "buttonReleased":' + str(buttonReleased).lower() + '}')
-                    sys.stdout.flush()
+                data = recieveSocket.recv(25)
+                print(data)
+                sys.stdout.flush()
 
             except:
                 address = None
