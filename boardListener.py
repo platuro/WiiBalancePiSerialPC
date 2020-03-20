@@ -3,6 +3,7 @@ import time
 import bluetooth
 import sys
 import subprocess
+from threading import Timer
 
 CONTINUOUS_REPORTING = "04"
 COMMAND_LIGHT = 11
@@ -99,7 +100,7 @@ def isConnected(address):
     return False
 
 
-def main():
+def calc():
 
     address = None
     buttonDown = False
@@ -132,6 +133,7 @@ def main():
     while True:
         if address is not None and isConnected(address):
             # connected to a wii board
+            time.sleep(1)
             try:
                 # get board data
                 data = recieveSocket.recv(25)
@@ -238,6 +240,10 @@ def main():
                         # connected to a board
                         break
 
+
+def main():
+    t = Timer(1.0, calc)
+    t.start()
 
 if __name__ == "__main__":
     main()
