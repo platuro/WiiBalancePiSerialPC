@@ -21,5 +21,5 @@ app.get("/weight", (req, res, next) => {
 });
 
 app.get("/", (req, res, next) => {
-  res.send('<body style="text-align:center"><h2>Dein Gewicht</h2><p>'+BalanceBoard.totalWeight+'</p></body>');
+  res.send('<body style="text-align:center"><h2>Dein Gewicht</h2><p>'+BalanceData.totalWeight+'</p></body>');
 });
