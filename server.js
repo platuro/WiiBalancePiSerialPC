@@ -1,5 +1,5 @@
-//const BalanceBoard = require("wii-balance-board-pi");
-const raspi = require('raspi');
+const BalanceBoard = require("wii-balance-board-pi");
+/*const raspi = require('raspi');
 const Serial = require('raspi-serial').Serial;
 
 raspi.init(() => {
@@ -17,12 +17,12 @@ raspi.init(() => {
       }
       setInterval(SendTest, 1000);
     });
-  });
+  });*/
 
-/*var balanceBoard = new BalanceBoard();
+var balanceBoard = new BalanceBoard();
  
 balanceBoard.connect();
  
 balanceBoard.on("data", data => {
   console.log(data);
-});*/
+});
