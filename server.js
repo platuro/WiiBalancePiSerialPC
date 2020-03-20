@@ -1,13 +1,21 @@
 //const BalanceBoard = require("wii-balance-board-pi");
-const SerialPort = require('serialport')
-const port = new SerialPort("/dev/ttyUSB0", { baudRate: 256000 })
+const raspi = require('raspi');
+const Serial = require('raspi-serial').Serial;
 
-function SendTest(){
-    port.write('ROBOT POWER ON\n')
-}
- 
+raspi.init(() => {
+    var serial = new Serial();
+    serial.open(() => {
+      serial.on('data', (data) => {
+        process.stdout.write(data);
+      });
+      serial.write('Hello from raspi-serial');
+      function SendTest(){
+        serial.write('Hello from raspi-serial');
+      }
+      setInterval(SendTest, 1000);
+    });
+  });
 
-setInterval(SendTest, 1000);
 /*var balanceBoard = new BalanceBoard();
  
 balanceBoard.connect();
