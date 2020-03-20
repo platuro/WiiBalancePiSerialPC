@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "serialport": "^8.0.7",
     "wii-balance-board-pi": "^1.1.2"
   },
   "devDependencies": {},
